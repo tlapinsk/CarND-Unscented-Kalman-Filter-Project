@@ -51,6 +51,34 @@ UKF::UKF() {
 
   Hint: one or more values initialized above might be wildly off...
   */
+  // Initially set to false until first measurement
+  is_initialized_ = false;
+
+  // State dimension
+  n_x_ = 5;
+
+  // Augmented dimension
+  n_aug_ = 7;
+
+  // Spreading parameter
+  lambda_ = 0;
+
+  // Matrix to hold sigma points
+  Xsig_pred_ = MatrixXd(n_x_, 2*n_aug_+1);
+
+  // Vector for weights
+  weights_ = VectorXd(2*n_aug_+1);
+
+  // Noise matrices
+  R_radar = MatrixXd(3,3);
+  R_laser = MatrixXd(2,2);  
+
+  // Start time
+  time_us_ = 0;
+
+  // NIS
+  NIS_radar_ = 0;
+  NIS_laser_ = 0;
 }
 
 UKF::~UKF() {}
@@ -66,6 +94,52 @@ void UKF::ProcessMeasurement(MeasurementPackage meas_package) {
   Complete this function! Make sure you switch between lidar and radar
   measurements.
   */
+  if (!is_initialized_) {
+    // First measurement
+    x_ << 1, 1, 1, 1, 0.1;
+
+    // Initialize covariance matrix
+    P_ << 0.15, 0, 0, 0, 0,
+          0, 0.15, 0, 0, 0,
+          0, 0, 1, 0, 0,
+          0, 0, 0, 1, 0,
+          0, 0, 0, 0, 1;
+
+    // Initialize time stamp
+    time_us_ = meas_package.timestamp_;
+
+    if (meas_package.sensor_type_ == MeasurementPackage::RADAR && use_radar_) {
+      // Convert from polar to cartesian
+      float ro     = meas_package.raw_measurements_(0);
+      float phi    = meas_package.raw_measurements_(1);
+      float ro_dot = meas_package.raw_measurements_(2);
+      x_(0) = ro * cos(phi);
+      x_(1) = ro * sin(phi);
+    }
+    else if (meas_package.sensor_type_ == MeasurementPackage::LASER && use_laser_) {
+      x_(0) = meas_package.raw_measurements_(0);
+      x_(1) = meas_package.raw_measurements_(1);
+    }
+
+    // Done
+    is_initialized_ = true;
+
+    return;
+  }
+
+  // Calculate delta_t and store current time
+  double delta_t = (meas_package.timestamp_ - time_us_) / 1000000.0;
+  time_us_ = meas_package.timestamp_;
+
+  // Prediction
+  Prediction(delta_t);
+
+  // Measurement updates
+  if (meas_package.sensor_type_ == MeasurementPackage::RADAR) {
+    UpdateRadar(meas_package);
+  } else {
+    UpdateLidar(meas_package);
+  }
 }
 
 /**
