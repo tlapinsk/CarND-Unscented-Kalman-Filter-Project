@@ -13,7 +13,7 @@ using Eigen::VectorXd;
 class UKF {
 public:
 
-  ///* initially set to false, set to true in first call of ProcessMeasurement
+    ///* initially set to false, set to true in first call of ProcessMeasurement
   bool is_initialized_;
 
   ///* if this is false, laser measurements will be ignored (except for init)
@@ -57,6 +57,10 @@ public:
 
   ///* Weights of sigma points
   VectorXd weights_;
+  
+  ///* Noise matrices
+  MatrixXd R_radar;
+  MatrixXd R_laser;
 
   ///* State dimension
   int n_x_;
@@ -66,6 +70,12 @@ public:
 
   ///* Sigma point spreading parameter
   double lambda_;
+
+  ///* the current NIS for radar
+  double NIS_radar_;
+
+  ///* the current NIS for laser
+  double NIS_laser_;
 
 
   /**
