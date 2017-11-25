@@ -24,7 +24,7 @@ FYI, I ran my code on a Macbook Pro. Please ensure you have downloaded the Udaci
 9. Run the term2_sim application, select Project 1 & 2, and click 'Start'
 
 ## Results
-My Extended Kalman Filter produced the below results. 'px' is the x-position, 'py' is the y-position, 'vx' is velocity in the x-direction, and 'vy' is velocity in the y-direction.
+My Unscented Kalman Filter produced the below results. 'px' is the x-position, 'py' is the y-position, 'vx' is velocity in the x-direction, and 'vy' is velocity in the y-direction.
 
 | Input |   MSE   |
 | ----- | ------- |
