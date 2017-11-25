@@ -34,13 +34,11 @@ My Extended Kalman Filter produced the below results. 'px' is the x-position, 'p
 |  vy   | 0.2220  |
 
 
-![Visualization](https://github.com/tlapinsk/CarND-Extended-Kalman-Filter-Project/blob/master/output/results.png?raw=true "Visualization")
+![Visualization](https://github.com/tlapinsk/CarND-Unscented-Kalman-Filter-Project/blob/master/output/results.png?raw=true "Visualization")
 
 ## Resources
-Most of my code is pulled from Udacity's introduction to Extended Kalman Filters within the SDCND course material. Below are further resources and helpful links that I used to complete this project:
+Most of my code is pulled from Udacity's introduction to Unscented Kalman Filters within the SDCND course material. Below are further resources and helpful links that I used to complete this project:
 
-- [Normalization in Kalman.cpp](https://discussions.udacity.com/t/ekf-radar-causes-rmse-to-go-through-the-roof/243944/5)
-- [Possibly better normalization option](https://discussions.udacity.com/t/already-used-atan2-to-calculate-phi-in-hx-do-i-still-need-to-normalize-the-phi-in-y/242332/5)
-- [Radar updates](https://discussions.udacity.com/t/radar-updates-are-messing-up/281342/3)
-- [Initialization graphic](https://discussions.udacity.com/t/initializing-the-radar-state-for-ekf/236396/10)
-- [RMSE values](https://discussions.udacity.com/t/rmse-values-of-ekf-project/243997)
+- [RMSE vx, vy too high](https://discussions.udacity.com/t/rmse-vx-vy-too-high/384143)
+- [Simulation freezes](https://discussions.udacity.com/t/simulation-freezes-after-few-timestamps/375369/5)
+- [Kalman Filters](https://medium.com/@kastsiukavets.alena/kalman-filter-extended-kalman-filter-unscented-kalman-filter-dbbd929f83c5)
