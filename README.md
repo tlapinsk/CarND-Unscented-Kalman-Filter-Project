@@ -1,4 +1,4 @@
-# Extended-Kalman-Filter
+# Unscented-Kalman-Filter
 In this project, I used C++ to write a program that processes Lidar and Radar data to track / predict object positioning via an Unscented Kalman Filter. 
 
 ## Project Info
@@ -20,7 +20,7 @@ FYI, I ran my code on a Macbook Pro. Please ensure you have downloaded the Udaci
 5. `mkdir build && cd build`
 6. `cmake`
 7. `make`
-8. `./ExtendedKF`
+8. `./UnscentedKF`
 9. Run the term2_sim application, select Project 1 & 2, and click 'Start'
 
 ## Results
